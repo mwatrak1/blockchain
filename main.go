@@ -1,15 +1,14 @@
 package main
 
 import (
-	"log"
-	"powblockchain/wallet"
+	"flag"
+	"powblockchain/node"
 )
 
-func init() {
-	log.SetPrefix("Blockchain ")
-}
-
 func main() {
-	myWallet := wallet.NewWallet()
-	log.Println(myWallet.Address())
+	port := flag.Uint("port", 5000, "TCP Port for Blockchain Node")
+	flag.Parse()
+
+	blockchainNode := node.NewBlockchainNode(uint16(*port))
+	blockchainNode.Run()
 }
